@@ -20,7 +20,7 @@ export default function Weather() {
             show5days(key);
             ifInFavorites(store.getState().cityModule.cityName);
         } else {
-            fetch(`http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&language=en`)
+            fetch(`https://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&language=en`)
                 .then((res) => {
                     if (res.ok) {
                         res.json().then((data) => {
@@ -43,7 +43,7 @@ export default function Weather() {
         if (sessionStorage.getItem(searchInput)) {
             setSearchData(JSON.parse(sessionStorage.getItem(searchInput)));
         } else {
-            fetch(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&q=${searchInput}&language=en`)
+            fetch(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&q=${searchInput}&language=en`)
                 .then((res) => {
                     res.json().then((data) => {
                         sessionStorage.setItem(searchInput, JSON.stringify(data));
@@ -69,7 +69,7 @@ export default function Weather() {
             show5days(key);
             ifInFavorites(name);
         } else {
-            fetch(`http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&language=en`)
+            fetch(`https://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&language=en`)
                 .then((res) => {
                     if (res.ok) {
                         res.json().then((data) => {
@@ -92,7 +92,7 @@ export default function Weather() {
         if (sessionStorage.getItem(cityKey + "_5")) {
             setDays(JSON.parse(sessionStorage.getItem(cityKey + "_5")));
         } else {
-            fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&language=en&metric=true`)
+            fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&language=en&metric=true`)
                 .then((res) => {
                     if (res.ok) {
                         res.json().then((data) => {
