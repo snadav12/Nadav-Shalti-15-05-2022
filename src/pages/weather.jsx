@@ -133,6 +133,7 @@ export default function Weather() {
     };
     return (
         <div className="weather">
+            <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
             <form onSubmit={searchCity}>
                 <input
                     type="search"
