@@ -1,0 +1,19 @@
+.favorites {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    justify-content: center;
+    .favorite {
+        width: 20%;
+        height: 100px;
+        text-align: center;
+        border: 1px solid black;
+        padding: 10px;
+        p {
+            margin-bottom: 5px;
+        }
+    }
+}

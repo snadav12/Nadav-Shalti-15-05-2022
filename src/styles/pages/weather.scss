@@ -1,0 +1,64 @@
+.weather {
+    text-align: center;
+    button {
+        border: none;
+        background-color: lightseagreen;
+        border-radius: 10px;
+        padding: 5px;
+    }
+    button:hover {
+        background-color: rgb(20, 140, 134);
+    }
+    form {
+        height: 30px;
+        margin-bottom: 10px;
+        input[type=search] {
+            padding: 5px;
+            width: 35%;
+            height: inherit;
+            border-radius: 10px;
+            border: 1px solid black;
+        }
+        button {
+            margin-inline-start: 5px;
+            height: inherit;
+        }
+    }
+    .searchData {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        gap: 5px;
+        margin: 0 auto 10px;
+    }
+    .city {
+        display: flex;
+        gap: 5px;
+        width: 90%;
+        padding: 10px;
+        margin: 0 auto 50px;
+        .cityInfo {
+            flex: 1;
+            text-align: start;
+            display: grid;
+            grid: auto / 150px auto;
+            gap: 5px;
+        }
+    }
+    .days {
+        display: flex;
+        justify-content: center;
+        width: 90%;
+        margin: 0 auto;
+        gap: 10px;
+        .day {
+            border: 1px solid black;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+}
