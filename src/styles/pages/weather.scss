@@ -5,9 +5,9 @@
         background-color: lightseagreen;
         border-radius: 10px;
         padding: 5px;
-    }
-    button:hover {
-        background-color: rgb(20, 140, 134);
+        &:hover {
+            background-color: rgb(20, 140, 134);
+        }
     }
     form {
         height: 30px;
@@ -49,12 +49,15 @@
     }
     .days {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
         width: 90%;
         margin: 0 auto;
         gap: 10px;
         .day {
             border: 1px solid black;
+            width: 220px;
+            height: 100px;
             padding: 10px;
             display: flex;
             flex-direction: column;
