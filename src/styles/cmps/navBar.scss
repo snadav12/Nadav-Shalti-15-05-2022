@@ -16,7 +16,7 @@
         color: inherit;
         padding: 10px;
         &.active {
-            background-color: lightblue;
+            background-color: lightseagreen;
             border-radius: 5px;
         }
     }
@@ -28,5 +28,15 @@
         border: none;
         color: inherit;
         background-color: inherit;
+    }
+}
+
+@media (max-width: 520px) {
+    .navBar {
+        font-size: 14px;
+        a,
+        button {
+            padding: 5px;
+        }
     }
 }
