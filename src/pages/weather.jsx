@@ -141,7 +141,7 @@ export default function Weather() {
             <form onSubmit={searchCity}>
                 <input
                     type="Search"
-                    placeholder="search"
+                    placeholder="Enter City Name"
                     title="Please Enter Valid City Name"
                     pattern="[a-zA-Z]+"
                     value={searchInput}
