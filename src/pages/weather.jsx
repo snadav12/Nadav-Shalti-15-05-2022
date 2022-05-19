@@ -10,6 +10,7 @@ export default function Weather() {
     const [days, setDays] = useState([]);
     const [name, setName] = useState("");
     const [isInFavorites, setIsInFavorites] = useState(false);
+    const [metric, setMetric] = useState(true);
     store.dispatch(loadFavorites());
 
     useEffect(() => {
@@ -92,7 +93,7 @@ export default function Weather() {
         if (sessionStorage.getItem(cityKey + "_5")) {
             setDays(JSON.parse(sessionStorage.getItem(cityKey + "_5")));
         } else {
-            fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&language=en&metric=true`)
+            fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&language=en&metric=${metric}`)
                 .then((res) => {
                     if (res.ok) {
                         res.json().then((data) => {
@@ -127,6 +128,10 @@ export default function Weather() {
         const index = favorites.findIndex(fav => fav.cityName === name)
         setIsInFavorites(index !== -1);
     }
+    const switchMode = (ev) => {
+        ev.preventDefault();
+        setMetric(!metric);
+    }
     const handleChange = ({ target }) => {
         const value = target.value;
         setSearchInput(value);
@@ -157,8 +162,10 @@ export default function Weather() {
                             <p>{name}</p>
                             <p>{moment(data.LocalObservationDateTime).format("dddd , MMMM Do YYYY")}</p>
                             <p>{data.WeatherText}</p>
-                            <p>{data.Temperature.Metric.Value}º{data.Temperature.Metric.Unit} </p>
+                            {metric ? <p>{data.Temperature.Metric.Value}º{data.Temperature.Metric.Unit} </p> :
+                                <p>{data.Temperature.Imperial.Value}º{data.Temperature.Imperial.Unit} </p>}
                         </div>
+                        <button onClick={switchMode}>{metric ? "Fahrenheit" : "Celsius"}</button>
                         {!isInFavorites && <button onClick={addToFavorites}>Add To Favorits</button>}
                         {isInFavorites && <button onClick={removeFromFavorites}>Remove From Favorits</button>}
                     </div>
