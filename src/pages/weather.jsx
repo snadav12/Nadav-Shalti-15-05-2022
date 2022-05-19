@@ -155,22 +155,20 @@ export default function Weather() {
                 })}
             </div>
 
-            {
-                store.getState().cityModule.city && store.getState().cityModule.city.map((data, i) => {
-                    return <div key={i} className='city'>
-                        <div className="cityInfo">
-                            <p>{name}</p>
-                            <p>{moment(data.LocalObservationDateTime).format("dddd , MMMM Do YYYY")}</p>
-                            <p>{data.WeatherText}</p>
-                            {metric ? <p>{data.Temperature.Metric.Value}º{data.Temperature.Metric.Unit} </p> :
-                                <p>{data.Temperature.Imperial.Value}º{data.Temperature.Imperial.Unit} </p>}
-                        </div>
-                        <button onClick={switchMode}>{metric ? "Fahrenheit" : "Celsius"}</button>
-                        {!isInFavorites && <button onClick={addToFavorites}>Add To Favorits</button>}
-                        {isInFavorites && <button onClick={removeFromFavorites}>Remove From Favorits</button>}
+            {store.getState().cityModule.city && store.getState().cityModule.city.map((data, i) => {
+                return <div key={i} className='city'>
+                    <div className="cityInfo">
+                        <p>{name}</p>
+                        <p>{moment(data.LocalObservationDateTime).format("dddd , MMMM Do YYYY")}</p>
+                        <p>{data.WeatherText}</p>
+                        {metric ? <p>{data.Temperature.Metric.Value}º{data.Temperature.Metric.Unit} </p> :
+                            <p>{data.Temperature.Imperial.Value}º{data.Temperature.Imperial.Unit} </p>}
                     </div>
-                })
-            }
+                    <button onClick={switchMode}>{metric ? "Fahrenheit" : "Celsius"}</button>
+                    {!isInFavorites && <button onClick={addToFavorites}>Add To Favorits</button>}
+                    {isInFavorites && <button onClick={removeFromFavorites}>Remove From Favorits</button>}
+                </div>
+            })}
             {days.DailyForecasts && <h1>5 Day Weather {name}</h1>}
             <div className="days">
                 {days.DailyForecasts && days.DailyForecasts.map((data, i) => {
