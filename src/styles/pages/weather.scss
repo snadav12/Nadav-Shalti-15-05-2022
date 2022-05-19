@@ -2,6 +2,7 @@
     text-align: center;
     button {
         border: none;
+        color: inherit;
         background-color: lightseagreen;
         border-radius: 10px;
         padding: 5px;
@@ -17,7 +18,7 @@
             width: 35%;
             height: inherit;
             border-radius: 10px;
-            border: 1px solid black;
+            border: 1px solid;
         }
         button {
             margin-inline-start: 5px;
@@ -35,6 +36,7 @@
     }
     .city {
         display: flex;
+        color: inherit;
         gap: 5px;
         width: 90%;
         padding: 10px;
@@ -55,7 +57,7 @@
         margin: 0 auto;
         gap: 10px;
         .day {
-            border: 1px solid black;
+            border: 1px solid;
             width: 220px;
             height: 100px;
             padding: 10px;

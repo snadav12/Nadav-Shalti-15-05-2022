@@ -5,7 +5,7 @@
     height: 50px;
     padding: 10px;
     margin-bottom: 10px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid;
     font-size: 20px;
     font-weight: 600;
     .title {
@@ -13,11 +13,20 @@
         font-size: inherit;
     }
     a {
-        color: black;
+        color: inherit;
         padding: 10px;
         &.active {
             background-color: lightblue;
             border-radius: 5px;
         }
+    }
+    button {
+        font-size: inherit;
+        font: inherit;
+        font-weight: 600;
+        padding: 10px;
+        border: none;
+        color: inherit;
+        background-color: inherit;
     }
 }
