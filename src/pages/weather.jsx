@@ -39,15 +39,14 @@ export default function Weather() {
         }
     }, []);
 
-    const searchCity = (ev) => {
-        ev.preventDefault();
-        if (sessionStorage.getItem(searchInput)) {
-            setSearchData(JSON.parse(sessionStorage.getItem(searchInput)));
+    const searchCity = (input) => {
+        if (sessionStorage.getItem(input)) {
+            setSearchData(JSON.parse(sessionStorage.getItem(input)));
         } else {
-            fetch(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&q=${searchInput}&language=en`)
+            fetch(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&q=${input}&language=en`)
                 .then((res) => {
                     res.json().then((data) => {
-                        sessionStorage.setItem(searchInput, JSON.stringify(data));
+                        sessionStorage.setItem(input, JSON.stringify(data));
                         setSearchData(data)
                     })
                 })
@@ -58,17 +57,16 @@ export default function Weather() {
     }
 
     const showWeather = (ev) => {
-        ev.preventDefault()
-        const value = ev.target.value.split(",");
-        const key = value[0];
-        const name = value[1];
+        ev.preventDefault();
+        const data = JSON.parse(sessionStorage.getItem(searchInput));
+        const key = data[0].Key
         if (sessionStorage.getItem(key)) {
             store.dispatch(setCity(JSON.parse(sessionStorage.getItem(key))))
-            store.dispatch(setCityName(name))
+            store.dispatch(setCityName(searchInput))
             store.dispatch(setKey(key))
-            setName(name)
+            setName(searchInput)
             show5days(key);
-            ifInFavorites(name);
+            ifInFavorites(searchInput);
         } else {
             fetch(`https://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=LizE6tVMMuTbH3ZYFq2nnLl4liNALkbp&language=en`)
                 .then((res) => {
@@ -76,11 +74,11 @@ export default function Weather() {
                         res.json().then((data) => {
                             sessionStorage.setItem(key, JSON.stringify(data));
                             store.dispatch(setCity(data))
-                            store.dispatch(setCityName(name))
+                            store.dispatch(setCityName(searchInput))
                             store.dispatch(setKey(key))
-                            setName(name)
+                            setName(searchInput)
                             show5days(key);
-                            ifInFavorites(name);
+                            ifInFavorites(searchInput);
                         })
                     } else alert(res)
                 })
@@ -132,28 +130,36 @@ export default function Weather() {
         ev.preventDefault();
         setMetric(!metric);
     }
-    const handleChange = ({ target }) => {
-        const value = target.value;
+
+    const inputCity = (ev) => {
+        ev.preventDefault();
+        const value = ev.target.value;
+        console.log(value);
         setSearchInput(value);
+        searchCity(value)
+    }
+    const handleChange = (ev) => {
+        ev.preventDefault();
+        const value = ev.target.value;
+        setSearchInput(value);
+        if (value) searchCity(value);
     };
     return (
         <div className="weather">
-            <form onSubmit={searchCity}>
+            <form autoComplete="off">
                 <input
                     type="Search"
                     placeholder="Enter City Name"
                     title="Please Enter Valid City Name"
-                    pattern="[a-zA-Z]+"
                     value={searchInput}
                     onChange={handleChange} />
-                <button>Search</button>
-
+                <button onClick={showWeather}>Search</button>
+                <div className="searchData">
+                    {searchData.map((data, i) => {
+                        return <button key={i} onClick={inputCity} value={data.LocalizedName}>{data.LocalizedName}</button>
+                    })}
+                </div>
             </form>
-            <div className="searchData">
-                {searchData.map((data, i) => {
-                    return <button key={i} value={data.Key + "," + data.LocalizedName} onClick={showWeather}>{data.LocalizedName}</button>
-                })}
-            </div>
 
             {store.getState().cityModule.city && store.getState().cityModule.city.map((data, i) => {
                 return <div key={i} className='city'>
