@@ -142,7 +142,8 @@ export default function Weather() {
         ev.preventDefault();
         const value = ev.target.value;
         setSearchInput(value);
-        if (value) searchCity(value);
+        if (value) searchCity(value)
+        else setSearchData([])
     };
     return (
         <div className="weather">
